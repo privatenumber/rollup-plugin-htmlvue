@@ -11,7 +11,7 @@ Import HTML-snippets and SVGs as Vue components.
 npm i -D rollup-plugin-vue rollup-plugin-htmlvue
 ```
 
-## Config
+## 🛠 Config
 
 rollup.config.js
 ```js
@@ -36,7 +36,7 @@ htmlvue({
 })
 ```
 
-### Options
+### ⚙️ Options
 - `vPre` `<Boolean>` (`false`)
 
     Adds [`v-pre`](https://vuejs.org/v2/api/#v-pre) to the root element.
