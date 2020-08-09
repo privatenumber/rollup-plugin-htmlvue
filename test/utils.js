@@ -3,6 +3,11 @@ const vue = require('rollup-plugin-vue');
 const Vue = require('vue');
 const htmlvue = require('..');
 
+Object.assign(Vue.config, {
+	productionTip: false,
+	devtools: false,
+});
+
 async function build({input, opts}) {
 	const bundle = await rollup({
 		input,
@@ -11,7 +16,10 @@ async function build({input, opts}) {
 			vue(),
 		],
 	});
-	const {output} = await bundle.generate({format: 'cjs'});
+	const {output} = await bundle.generate({
+		format: 'cjs',
+		exports: 'default',
+	});
 	return output[0].code;
 }
 
