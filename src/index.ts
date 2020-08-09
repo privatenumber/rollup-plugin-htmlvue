@@ -26,6 +26,7 @@ export default function HtmlVue(options: Options = {}): Plugin {
 	return {
 		name: 'htmlvue',
 
+		// If it matches a resource, rename it with the .vue extension
 		async resolveId(id: string, importer?: string) {
 			if (!isAbsolute(id)) {
 				const resolved = await this.resolve(id, importer, {skipSelf: true});
@@ -41,6 +42,7 @@ export default function HtmlVue(options: Options = {}): Plugin {
 			return `${id}${virtualExt}`;
 		},
 
+		// Create SFC
 		load(id) {
 			if (!id.endsWith(virtualExt)) {
 				return null;
