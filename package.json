@@ -1,7 +1,16 @@
 {
   "name": "rollup-plugin-htmlvue",
   "version": "0.0.0-development",
-  "description": "",
+  "description": "Rollup plugin for transforming HTML/XML to Vue SFC",
+  "keywords": [
+    "rollup",
+    "rollup plugin",
+    "vue",
+    "html",
+    "xml",
+    "svg"
+  ],
+  "files": ["dist"],
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "scripts": {
