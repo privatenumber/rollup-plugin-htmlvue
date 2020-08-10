@@ -1,4 +1,4 @@
-# rollup-plugin-htmlvue
+# rollup-plugin-htmlvue <a href="https://npm.im/rollup-plugin-htmlvue"><img src="https://badgen.net/npm/v/rollup-plugin-htmlvue"></a> <a href="https://npm.im/rollup-plugin-htmlvue"><img src="https://badgen.net/npm/dm/rollup-plugin-htmlvue"></a> <a href="https://packagephobia.now.sh/result?p=rollup-plugin-htmlvue"><img src="https://packagephobia.now.sh/badge?p=rollup-plugin-htmlvue"></a>
 
 Import HTML-snippets and SVGs as Vue components.
 
