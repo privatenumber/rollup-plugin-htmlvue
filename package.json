@@ -24,6 +24,7 @@
 	"scripts": {
 		"lint": "eslint .",
 		"build": "rollup -c",
+		"typecheck": "tsc --noEmit",
 		"test": "jest"
 	},
 	"husky": {

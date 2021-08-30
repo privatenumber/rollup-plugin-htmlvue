@@ -1,27 +1,16 @@
 {
 	"compilerOptions": {
-		"rootDir": "src",
-		"target": "es2017",
+		"outDir": "dist",
 
 		"strict": true,
-		"alwaysStrict": true,
-		"strictFunctionTypes": true,
-		"strictNullChecks": true,
-		"strictPropertyInitialization": true,
+		"declaration": true,
+		"esModuleInterop": true,
+		"isolatedModules": true,
+		"moduleResolution": "node",
 
-		"forceConsistentCasingInFileNames": true,
-		"noImplicitAny": true,
-		"noImplicitReturns": true,
-		"noImplicitThis": true,
-		"noFallthroughCasesInSwitch": true,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-
-		"emitDecoratorMetadata": true,
-		"experimentalDecorators": true,
-		"downlevelIteration": true,
-
-		"composite": true,
-		"declaration": true
-	}
+		// Node 10
+		"target": "ES2018",
+		"lib": ["ES2018"],
+	},
+	"include": ["src"]
 }
