@@ -1,6 +1,6 @@
 import { readFile } from 'fs';
 import { promisify } from 'util';
-import { isAbsolute } from 'path';
+import path from 'path';
 import { createFilter } from '@rollup/pluginutils';
 import { Plugin } from 'rollup';
 import { load } from 'cheerio';
@@ -28,7 +28,7 @@ export default function HtmlVue(options: Options = {}): Plugin {
 
 		// If it matches a resource, rename it with the .vue extension
 		async resolveId(id: string, importer?: string) {
-			if (!isAbsolute(id)) {
+			if (!path.isAbsolute(id)) {
 				const resolved = await this.resolve(id, importer, { skipSelf: true });
 				if (resolved && !resolved.external) {
 					id = resolved.id;
