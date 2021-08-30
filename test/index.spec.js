@@ -1,5 +1,5 @@
 const path = require('path');
-const {build, run} = require('./utils');
+const { build, run } = require('./utils');
 
 describe('Basics', () => {
 	test('Build HTML', async () => {
@@ -7,7 +7,7 @@ describe('Basics', () => {
 			input: path.join(__dirname, '/fixtures/tos.html'),
 		});
 
-		const {$el} = run(code);
+		const { $el } = run(code);
 		expect($el.tagName).toBe('DIV');
 		expect($el.querySelector('h1').innerHTML).toBe('Terms of Service');
 		expect($el.querySelector('p').innerHTML.trim().startsWith('Lorem ipsum')).toBe(true);
@@ -21,7 +21,7 @@ describe('Basics', () => {
 			},
 		});
 
-		const {_vnode: vnode} = run(code);
+		const { _vnode: vnode } = run(code);
 		expect(vnode.tag).toBe('div');
 		expect(vnode.data.pre).toBe(true);
 		expect(vnode).toEqual(expect.objectContaining({
@@ -41,7 +41,7 @@ describe('Basics', () => {
 			},
 		});
 
-		const {_vnode: vnode} = run(code);
+		const { _vnode: vnode } = run(code);
 		expect(vnode.tag).toBe('div');
 		expect(vnode).toEqual(expect.objectContaining({
 			isStatic: true,
@@ -62,7 +62,7 @@ describe('SVG', () => {
 			},
 		});
 
-		const {_vnode: vnode} = run(code);
+		const { _vnode: vnode } = run(code);
 		expect(vnode.tag).toBe('svg');
 		expect(vnode.children[0].tag).toBe('metadata');
 	});
@@ -75,7 +75,7 @@ describe('SVG', () => {
 			},
 		});
 
-		const {$el} = run(code);
+		const { $el } = run(code);
 		expect($el.tagName).toBe('DIV');
 		expect($el.querySelector('h1').innerHTML).toBe('SVG');
 		expect(Boolean($el.querySelector('svg'))).toBe(true);

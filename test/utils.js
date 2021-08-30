@@ -1,4 +1,4 @@
-const {rollup} = require('rollup');
+const { rollup } = require('rollup');
 const vue = require('rollup-plugin-vue');
 const Vue = require('vue');
 const htmlvue = require('..');
@@ -8,7 +8,7 @@ Object.assign(Vue.config, {
 	devtools: false,
 });
 
-async function build({input, opts}) {
+async function build({ input, opts }) {
 	const bundle = await rollup({
 		input,
 		plugins: [
@@ -16,15 +16,15 @@ async function build({input, opts}) {
 			vue(),
 		],
 	});
-	const {output} = await bundle.generate({
+	const { output } = await bundle.generate({
 		format: 'cjs',
 		exports: 'default',
 	});
 	return output[0].code;
 }
 
-function run(src) {
-	const Component = eval(src); // eslint-disable-line no-eval
+function run(source) {
+	const Component = eval(source); // eslint-disable-line no-eval
 	const vm = new Vue(Component);
 	vm.$mount();
 	return vm;

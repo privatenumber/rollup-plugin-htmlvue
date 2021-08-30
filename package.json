@@ -1,57 +1,64 @@
 {
-  "name": "rollup-plugin-htmlvue",
-  "version": "0.0.0-development",
-  "description": "Rollup plugin for transforming HTML/XML to Vue SFC",
-  "keywords": [
-    "rollup",
-    "rollup plugin",
-    "vue",
-    "html",
-    "xml",
-    "svg"
-  ],
-  "files": ["dist"],
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "scripts": {
-    "lint": "xo",
-    "build": "rollup -c",
-    "test": "jest"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.[tj]s": "xo"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/privatenumber/rollup-plugin-htmlvue.git"
-  },
-  "author": "Hiroki Osame <hiroki.osame@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/privatenumber/rollup-plugin-htmlvue/issues"
-  },
-  "homepage": "https://github.com/privatenumber/rollup-plugin-htmlvue#readme",
-  "devDependencies": {
-    "@types/cheerio": "^0.22.21",
-    "builtin-modules": "^3.1.0",
-    "husky": "^4.2.5",
-    "jest": "^26.2.2",
-    "lint-staged": "^10.2.11",
-    "rollup": "^2.23.1",
-    "rollup-plugin-typescript2": "^0.27.2",
-    "rollup-plugin-vue": "^5.1.9",
-    "semantic-release": "^17.1.1",
-    "vue": "^2.6.11",
-    "vue-template-compiler": "^2.6.11",
-    "xo": "^0.32.1"
-  },
-  "dependencies": {
-    "@rollup/pluginutils": "^3.1.0",
-    "cheerio": "^1.0.0-rc.3"
-  }
+	"name": "rollup-plugin-htmlvue",
+	"version": "0.0.0-development",
+	"description": "Rollup plugin for transforming HTML/XML to Vue SFC",
+	"keywords": [
+		"rollup",
+		"rollup plugin",
+		"vue",
+		"html",
+		"xml",
+		"svg"
+	],
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/privatenumber/rollup-plugin-htmlvue.git"
+	},
+	"author": "Hiroki Osame <hiroki.osame@gmail.com>",
+	"files": [
+		"dist"
+	],
+	"main": "dist/index.js",
+	"module": "dist/index.mjs",
+	"scripts": {
+		"lint": "eslint .",
+		"build": "rollup -c",
+		"test": "jest"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"*.[tj]s": "eslint"
+	},
+	"bugs": {
+		"url": "https://github.com/privatenumber/rollup-plugin-htmlvue/issues"
+	},
+	"homepage": "https://github.com/privatenumber/rollup-plugin-htmlvue#readme",
+	"dependencies": {
+		"@rollup/pluginutils": "^3.1.0",
+		"cheerio": "^1.0.0-rc.3"
+	},
+	"devDependencies": {
+		"@pvtnbr/eslint-config-typescript": "^1.0.1",
+		"@types/cheerio": "^0.22.21",
+		"builtin-modules": "^3.1.0",
+		"eslint": "^7.32.0",
+		"husky": "^4.2.5",
+		"jest": "^26.2.2",
+		"lint-staged": "^10.2.11",
+		"rollup": "^2.23.1",
+		"rollup-plugin-typescript2": "^0.27.2",
+		"rollup-plugin-vue": "^5.1.9",
+		"semantic-release": "^17.1.1",
+		"typescript": "^4.4.2",
+		"vue": "^2.6.11",
+		"vue-template-compiler": "^2.6.11"
+	},
+	"eslintConfig": {
+		"extends": "@pvtnbr/eslint-config-typescript"
+	}
 }
