@@ -1,11 +1,9 @@
-const path = require('path');
-const { build, run } = require('./utils');
+import path from 'path';
+import { build, run } from './utils';
 
 describe('Basics', () => {
 	test('Build HTML', async () => {
-		const code = await build({
-			input: path.join(__dirname, '/fixtures/tos.html'),
-		});
+		const code = await build(path.join(__dirname, '/fixtures/tos.html'));
 
 		const { $el } = run(code);
 		expect($el.tagName).toBe('DIV');
@@ -14,15 +12,16 @@ describe('Basics', () => {
 	});
 
 	test('Build HTML w/ v-pre', async () => {
-		const code = await build({
-			input: path.join(__dirname, '/fixtures/tos.html'),
-			opts: {
+		const code = await build(
+			path.join(__dirname, '/fixtures/tos.html'),
+			{
 				vPre: true,
 			},
-		});
+		);
 
 		const { _vnode: vnode } = run(code);
 		expect(vnode.tag).toBe('div');
+		// @ts-expect-error pre not defined
 		expect(vnode.data.pre).toBe(true);
 		expect(vnode).toEqual(expect.objectContaining({
 			// IsStatic: false, // should be true?
@@ -34,12 +33,12 @@ describe('Basics', () => {
 	});
 
 	test('Build HTML w/ v-once', async () => {
-		const code = await build({
-			input: path.join(__dirname, '/fixtures/tos.html'),
-			opts: {
+		const code = await build(
+			path.join(__dirname, '/fixtures/tos.html'),
+			{
 				vOnce: true,
 			},
-		});
+		);
 
 		const { _vnode: vnode } = run(code);
 		expect(vnode.tag).toBe('div');
@@ -55,25 +54,25 @@ describe('Basics', () => {
 
 describe('SVG', () => {
 	test('filter to build SVG', async () => {
-		const code = await build({
-			input: path.join(__dirname, '/fixtures/example.svg'),
-			opts: {
+		const code = await build(
+			path.join(__dirname, '/fixtures/example.svg'),
+			{
 				include: '**/*.svg',
 			},
-		});
+		);
 
 		const { _vnode: vnode } = run(code);
 		expect(vnode.tag).toBe('svg');
-		expect(vnode.children[0].tag).toBe('metadata');
+		expect(vnode.children?.[0].tag).toBe('metadata');
 	});
 
 	test('import from Vue', async () => {
-		const code = await build({
-			input: path.join(__dirname, '/fixtures/import-svg.vue'),
-			opts: {
+		const code = await build(
+			path.join(__dirname, '/fixtures/import-svg.vue'),
+			{
 				include: '**/*.svg',
 			},
-		});
+		);
 
 		const { $el } = run(code);
 		expect($el.tagName).toBe('DIV');
