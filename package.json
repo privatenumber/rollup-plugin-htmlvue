@@ -1,6 +1,6 @@
 {
 	"name": "rollup-plugin-htmlvue",
-	"version": "0.0.0-development",
+	"version": "0.0.0-semantic-release",
 	"description": "Rollup plugin for transforming HTML/XML to Vue SFC",
 	"keywords": [
 		"rollup",
@@ -11,11 +11,12 @@
 		"svg"
 	],
 	"license": "MIT",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/privatenumber/rollup-plugin-htmlvue.git"
+	"repository": "privatenumber/rollup-plugin-htmlvue",
+	"funding": "https://github.com/privatenumber/rollup-plugin-htmlvue?sponsor=1",
+	"author": {
+		"name": "Hiroki Osame",
+		"email": "hiroki.osame@gmail.com"
 	},
-	"author": "Hiroki Osame <hiroki.osame@gmail.com>",
 	"files": [
 		"dist"
 	],
@@ -35,10 +36,6 @@
 	"lint-staged": {
 		"*.[tj]s": "eslint"
 	},
-	"bugs": {
-		"url": "https://github.com/privatenumber/rollup-plugin-htmlvue/issues"
-	},
-	"homepage": "https://github.com/privatenumber/rollup-plugin-htmlvue#readme",
 	"dependencies": {
 		"@rollup/pluginutils": "^3.1.0",
 		"cheerio": "^1.0.0-rc.3"
