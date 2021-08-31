@@ -2,11 +2,14 @@
 
 Import HTML-snippets and SVGs as Vue components.
 
-## :raising_hand: Why?
-- 🔥 **Not coupled to Vue compiler** Comiles to SFC for your [Vue plugin](https://github.com/vuejs/rollup-plugin-vue) to compile
+### Features
+- 🔥 **Not coupled to Vue compiler** Comiles the HTML to a Vue.js SFC for the [Vue plugin](https://github.com/vuejs/rollup-plugin-vue) to handle compilation
 - 💫 **Versatile** Supports any XML-parseable markup
 
-## :rocket: Install
+## 🙋 Why?
+Great for compiling SVG files as Vue.js components.
+
+## 🚀 Install
 ```sh
 npm i -D rollup-plugin-vue rollup-plugin-htmlvue
 ```
