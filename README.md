@@ -59,6 +59,6 @@ Type: `boolean`
 
 Adds [`functional`](https://vuejs.org/v2/api/#functional) to the template to make it a functional component. Note, this syntax is only supported in Vue 2.
 
-### `include` and `exclude`
+### include/exclude
 
 Patterns to identify which files to apply the plugin to. Passed into [@rollup/pluginutils](https://github.com/rollup/plugins/tree/master/packages/pluginutils#include-and-exclude).
