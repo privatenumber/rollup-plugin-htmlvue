@@ -3,7 +3,7 @@
 Import HTML-snippets and SVGs as Vue components.
 
 ### Features
-- 🔥 **Not coupled to Vue compiler** Comiles the HTML to a Vue.js SFC for the [Vue plugin](https://github.com/vuejs/rollup-plugin-vue) to handle compilation
+- 🔥 **Works with Vue 2 & 3** Comiles the HTML to a Vue.js SFC for the [Vue plugin](https://github.com/vuejs/rollup-plugin-vue) to handle compilation
 - 💫 **Versatile** Supports any XML-parseable markup
 
 ## 🙋 Why?
@@ -40,12 +40,25 @@ htmlvue({
 ```
 
 ## ⚙️ Options
-- `vPre` `<Boolean>` (`false`)
+### vPre
+Type: `boolean`
 
-    Adds [`v-pre`](https://vuejs.org/v2/api/#v-pre) to the root element.
-- `vOnce` `<Boolean>` (`false`)
+Default: `false`
 
-    Adds [`v-once`](https://vuejs.org/v2/api/#v-once) to the root element.
-- `include` and `exclude`
+Adds [`v-pre`](https://vuejs.org/v2/api/#v-pre) to the root element.
 
-    Patterns to identify which files to apply the plugin to. Passed into [@rollup/pluginutils](https://github.com/rollup/plugins/tree/master/packages/pluginutils#include-and-exclude).
+### vOnce
+Type: `boolean`
+
+Default: `false`
+
+Adds [`v-once`](https://vuejs.org/v2/api/#v-once) to the root element.
+
+### functional
+Type: `boolean`
+
+Adds [`functional`](https://vuejs.org/v2/api/#functional) to the template to make it a functional component. Note, this syntax is only supported in Vue 2.
+
+### `include` and `exclude`
+
+Patterns to identify which files to apply the plugin to. Passed into [@rollup/pluginutils](https://github.com/rollup/plugins/tree/master/packages/pluginutils#include-and-exclude).
