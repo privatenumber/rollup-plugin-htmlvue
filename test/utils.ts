@@ -10,7 +10,7 @@ Object.assign(Vue.config, {
 
 export async function build(
 	input: string,
-	options?: any,
+	options?: Parameters<typeof htmlvue>[0],
 ) {
 	const bundle = await rollup({
 		input,
@@ -28,7 +28,11 @@ export async function build(
 
 export function run(source: string) {
 	const Component = eval(source); // eslint-disable-line no-eval
-	const vm = new Vue(Component);
+	const vm = new Vue(
+		Component.functional
+			? { render: h => h('div', [h(Component)]) }
+			: Component,
+	);
 	vm.$mount();
 	return vm as Vue & {
 		_vnode: VNode;

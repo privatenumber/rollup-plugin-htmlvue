@@ -79,4 +79,20 @@ describe('SVG', () => {
 		expect($el.querySelector('h1').innerHTML).toBe('SVG');
 		expect(Boolean($el.querySelector('svg'))).toBe(true);
 	});
+
+	test('functional component', async () => {
+		const code = await build(
+			path.join(__dirname, '/fixtures/example.svg'),
+			{
+				include: '**/*.svg',
+				functional: true,
+			},
+		);
+
+		const vm = run(code);
+		const vnode = vm._vnode.children![0];
+		expect(vnode.tag).toBe('svg');
+		// @ts-expect-error fnOptions not defined
+		expect(vnode.fnOptions.functional).toBe(true);
+	});
 });

@@ -12,6 +12,7 @@ interface Options {
 	exclude?: string;
 	vOnce?: boolean;
 	vPre?: boolean;
+	functional?: boolean;
 }
 
 const virtualExtension = '.htmlvue.vue';
@@ -64,7 +65,7 @@ export default function HtmlVue(options: Options = {}): Plugin {
 					rootElement.attr('v-pre', '');
 				}
 
-				return `<template>${$.xml(rootElement)}</template>`;
+				return `<template${options.functional ? ' functional' : ''}>${$.xml(rootElement)}</template>`;
 			});
 		},
 	};
