@@ -17,11 +17,10 @@ interface Options {
 const virtualExtension = '.htmlvue.vue';
 
 export default function HtmlVue(options: Options = {}): Plugin {
-	if (!options.include) {
-		options.include = '**/*.html';
-	}
-
-	const filter = createFilter(options.include, options.exclude);
+	const filter = createFilter(
+		options.include ?? '**/*.html',
+		options.exclude,
+	);
 
 	return {
 		name: 'htmlvue',

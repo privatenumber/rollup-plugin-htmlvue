@@ -18,8 +18,8 @@ npm i -D rollup-plugin-vue rollup-plugin-htmlvue
 
 rollup.config.js
 ```js
-import vue from 'rollup-plugin-vue';
-import htmlvue from 'rollup-plugin-htmlvue';
+import vue from 'rollup-plugin-vue'
+import htmlvue from 'rollup-plugin-htmlvue'
 
 export default {
     // ...
