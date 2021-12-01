@@ -7,8 +7,8 @@ describe('Basics', () => {
 
 		const { $el } = run(code);
 		expect($el.tagName).toBe('DIV');
-		expect($el.querySelector('h1').innerHTML).toBe('Terms of Service');
-		expect($el.querySelector('p').innerHTML.trim().startsWith('Lorem ipsum')).toBe(true);
+		expect($el.querySelector('h1')!.innerHTML).toBe('Terms of Service');
+		expect($el.querySelector('p')!.innerHTML.trim().startsWith('Lorem ipsum')).toBe(true);
 	});
 
 	test('Build HTML w/ v-pre', async () => {
@@ -50,6 +50,30 @@ describe('Basics', () => {
 			isOnce: false,
 		}));
 	});
+
+	test('Build HTML w/ inheritListeners', async () => {
+		const code = await build(
+			path.join(__dirname, '/fixtures/tos.html'),
+			{
+				inheritListeners: true,
+			},
+		);
+
+		const click = jest.fn();
+		const { _vnode: vnode } = run(
+			code,
+			component => ({
+				render: h => h(component, {
+					on: {
+						click,
+					},
+				}),
+			}),
+		);
+
+		(vnode.elm as HTMLDivElement).click();
+		expect(click).toBeCalled();
+	});
 });
 
 describe('SVG', () => {
@@ -76,7 +100,7 @@ describe('SVG', () => {
 
 		const { $el } = run(code);
 		expect($el.tagName).toBe('DIV');
-		expect($el.querySelector('h1').innerHTML).toBe('SVG');
+		expect($el.querySelector('h1')!.innerHTML).toBe('SVG');
 		expect(Boolean($el.querySelector('svg'))).toBe(true);
 	});
 
@@ -94,5 +118,30 @@ describe('SVG', () => {
 		expect(vnode.tag).toBe('svg');
 		// @ts-expect-error fnOptions not defined
 		expect(vnode.fnOptions.functional).toBe(true);
+	});
+
+	test('inheritListeners', async () => {
+		const code = await build(
+			path.join(__dirname, '/fixtures/example.svg'),
+			{
+				include: '**/*.svg',
+				inheritListeners: true,
+			},
+		);
+
+		const click = jest.fn();
+		const { _vnode: vnode } = run(
+			code,
+			component => ({
+				render: h => h(component, {
+					on: {
+						click,
+					},
+				}),
+			}),
+		);
+
+		vnode.elm!.dispatchEvent(new Event('click'));
+		expect(click).toBeCalled();
 	});
 });

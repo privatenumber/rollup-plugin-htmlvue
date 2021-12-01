@@ -1,6 +1,6 @@
 import { rollup } from 'rollup';
 import vue from 'rollup-plugin-vue';
-import Vue, { VNode } from 'vue';
+import Vue, { VNode, Component } from 'vue';
 import htmlvue from '../src/index';
 
 Object.assign(Vue.config, {
@@ -26,12 +26,20 @@ export async function build(
 	return output[0].code;
 }
 
-export function run(source: string) {
-	const Component = eval(source); // eslint-disable-line no-eval
+export function run(
+	source: string,
+	modifyComponent?: (component: Component) => Component,
+) {
+	let component = eval(source); // eslint-disable-line no-eval
+
+	if (modifyComponent) {
+		component = modifyComponent(component);
+	}
+
 	const vm = new Vue(
-		Component.functional
-			? { render: h => h('div', [h(Component)]) }
-			: Component,
+		component.functional
+			? { render: h => h('div', [h(component)]) }
+			: component,
 	);
 	vm.$mount();
 	return vm as Vue & {
