@@ -13,6 +13,7 @@ interface Options {
 	vOnce?: boolean;
 	vPre?: boolean;
 	functional?: boolean;
+	inheritListeners?: boolean;
 }
 
 const virtualExtension = '.htmlvue.vue';
@@ -63,6 +64,10 @@ export default function HtmlVue(options: Options = {}): Plugin {
 
 				if (options.vPre) {
 					rootElement.attr('v-pre', '');
+				}
+
+				if (options.inheritListeners) {
+					rootElement.attr('v-on', '$listeners');
 				}
 
 				return `<template${options.functional ? ' functional' : ''}>${$.xml(rootElement)}</template>`;

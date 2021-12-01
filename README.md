@@ -57,7 +57,13 @@ Adds [`v-once`](https://vuejs.org/v2/api/#v-once) to the root element.
 ### functional
 Type: `boolean`
 
-Adds [`functional`](https://vuejs.org/v2/api/#functional) to the template to make it a functional component. Note, this syntax is only supported in Vue 2.
+Adds [`functional`](https://vuejs.org/v2/api/#functional) to the template to make it a functional component. Only supported in Vue 2.
+
+
+### inheritListeners
+Type: `boolean`
+
+Adds [`v-on="$listeners"`](https://vuejs.org/v2/api/#vm-listeners) to the root element to inherit event listeners. Only supported in Vue 2.
 
 ### include/exclude
 
