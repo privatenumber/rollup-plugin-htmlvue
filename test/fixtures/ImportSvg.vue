@@ -10,7 +10,7 @@ import ExampleSvg from './example.svg';
 
 export default {
 	components: {
-		ExampleSvg
-	}
+		ExampleSvg,
+	},
 };
 </script>

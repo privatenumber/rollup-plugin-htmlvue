@@ -41,7 +41,7 @@
 		"cheerio": "^1.0.0-rc.3"
 	},
 	"devDependencies": {
-		"@pvtnbr/eslint-config-typescript": "^1.0.1",
+		"@pvtnbr/eslint-config": "^0.7.0",
 		"@types/cheerio": "^0.22.21",
 		"@types/jest": "^27.0.1",
 		"builtin-modules": "^3.1.0",
@@ -59,6 +59,6 @@
 		"vue-template-compiler": "^2.6.11"
 	},
 	"eslintConfig": {
-		"extends": "@pvtnbr/eslint-config-typescript"
+		"extends": "@pvtnbr"
 	}
 }

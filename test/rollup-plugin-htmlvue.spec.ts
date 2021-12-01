@@ -92,7 +92,7 @@ describe('SVG', () => {
 
 	test('import from Vue', async () => {
 		const code = await build(
-			path.join(__dirname, '/fixtures/import-svg.vue'),
+			path.join(__dirname, '/fixtures/ImportSvg.vue'),
 			{
 				include: '**/*.svg',
 			},
