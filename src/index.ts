@@ -1,15 +1,15 @@
 import { readFile } from 'fs';
 import { promisify } from 'util';
 import path from 'path';
-import { createFilter } from '@rollup/pluginutils';
+import { createFilter, type FilterPattern } from '@rollup/pluginutils';
 import { Plugin } from 'rollup';
 import { load } from 'cheerio';
 
 const $readFile = promisify(readFile);
 
-interface Options {
-	include?: string;
-	exclude?: string;
+export type Options = {
+	include?: FilterPattern;
+	exclude?: FilterPattern;
 	vOnce?: boolean;
 	vPre?: boolean;
 	functional?: boolean;

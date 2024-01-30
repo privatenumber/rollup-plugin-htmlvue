@@ -1,7 +1,7 @@
 import { rollup } from 'rollup';
 import vue from 'rollup-plugin-vue';
 import Vue, { VNode, Component } from 'vue';
-import htmlvue from '../src/index';
+import htmlvue, { type Options } from '../src/index';
 
 Object.assign(Vue.config, {
 	productionTip: false,
@@ -10,7 +10,7 @@ Object.assign(Vue.config, {
 
 export async function build(
 	input: string,
-	options?: Parameters<typeof htmlvue>[0],
+	options?: Options,
 ) {
 	const bundle = await rollup({
 		input,
