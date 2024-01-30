@@ -1,11 +1,8 @@
-import { readFile } from 'fs';
-import { promisify } from 'util';
+import fs from 'fs/promises';
 import path from 'path';
 import { createFilter, type FilterPattern } from '@rollup/pluginutils';
 import { Plugin } from 'rollup';
 import { load } from 'cheerio';
-
-const $readFile = promisify(readFile);
 
 export type Options = {
 	include?: FilterPattern;
@@ -18,7 +15,9 @@ export type Options = {
 
 const virtualExtension = '.htmlvue.vue';
 
-export default function HtmlVue(options: Options = {}): Plugin {
+const htmlvue = (
+	options: Options = {},
+): Plugin => {
 	const filter = createFilter(
 		options.include ?? '**/*.html',
 		options.exclude,
@@ -44,34 +43,36 @@ export default function HtmlVue(options: Options = {}): Plugin {
 		},
 
 		// Create SFC
-		load(id) {
+		async load(id) {
 			if (!id.endsWith(virtualExtension)) {
 				return null;
 			}
 
-			return $readFile(id.replace(virtualExtension, '')).then((html) => {
-				let $ = load(html, { xmlMode: true });
+			const html = await fs.readFile(id.replace(virtualExtension, ''));
 
-				if ($.root().children().length > 1) {
-					$ = load(`<div>${$.xml()}</div>`, { xmlMode: true });
-				}
+			let $ = load(html, { xmlMode: true });
 
-				const rootElement = $.root().children().first();
+			if ($.root().children().length > 1) {
+				$ = load(`<div>${$.xml()}</div>`, { xmlMode: true });
+			}
 
-				if (options.vOnce) {
-					rootElement.attr('v-once', '');
-				}
+			const rootElement = $.root().children().first();
 
-				if (options.vPre) {
-					rootElement.attr('v-pre', '');
-				}
+			if (options.vOnce) {
+				rootElement.attr('v-once', '');
+			}
 
-				if (options.inheritListeners) {
-					rootElement.attr('v-on', '$listeners');
-				}
+			if (options.vPre) {
+				rootElement.attr('v-pre', '');
+			}
 
-				return `<template${options.functional ? ' functional' : ''}>${$.xml(rootElement)}</template>`;
-			});
+			if (options.inheritListeners) {
+				rootElement.attr('v-on', '$listeners');
+			}
+
+			return `<template${options.functional ? ' functional' : ''}>${$.xml(rootElement)}</template>`;
 		},
 	};
-}
+};
+
+export default htmlvue;
