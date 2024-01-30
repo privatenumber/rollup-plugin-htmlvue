@@ -14,7 +14,7 @@ interface Options {
 	vPre?: boolean;
 	functional?: boolean;
 	inheritListeners?: boolean;
-}
+};
 
 const virtualExtension = '.htmlvue.vue';
 

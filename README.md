@@ -26,8 +26,8 @@ export default {
 
     plugins: [
         vue(),
-        htmlvue(),
-    ],
+        htmlvue()
+    ]
 }
 ```
 
@@ -35,7 +35,7 @@ By default, it only automatically resolves `.html` files. To apply it to other e
 
 ```js
 htmlvue({
-    include: '**/*.svg',
+    include: '**/*.svg'
 })
 ```
 
