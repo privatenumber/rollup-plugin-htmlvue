@@ -37,7 +37,8 @@
 		"lint": "eslint .",
 		"build": "pkgroll",
 		"type-check": "tsc",
-		"test": "jest"
+		"test": "jest",
+		"prepack": "pnpm build && clean-pkg-json"
 	},
 	"peerDependencies": {
 		"rollup": "^4.0.0"
@@ -51,6 +52,7 @@
 		"@types/cheerio": "^0.22.21",
 		"@types/jest": "^29.5.11",
 		"@types/node": "^20.11.10",
+		"clean-pkg-json": "^1.2.0",
 		"es-jest": "^2.1.0",
 		"eslint": "^8.56.0",
 		"jest": "^29.7.0",

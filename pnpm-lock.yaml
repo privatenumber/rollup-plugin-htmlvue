@@ -25,6 +25,9 @@ devDependencies:
   '@types/node':
     specifier: ^20.11.10
     version: 20.11.10
+  clean-pkg-json:
+    specifier: ^1.2.0
+    version: 1.2.0
   es-jest:
     specifier: ^2.1.0
     version: 2.1.0
@@ -2456,6 +2459,11 @@ packages:
     engines: {node: '>= 4.0'}
     dependencies:
       source-map: 0.6.1
+    dev: true
+
+  /clean-pkg-json@1.2.0:
+    resolution: {integrity: sha512-QHBWWOtpSCv5nfMFKwyxn4WMvkYE0msxj5xiqejYGqYepWVrK7O/om1Vn6nSl/WPtYn8ge9YmSCbTi1Hp8k+Hg==}
+    hasBin: true
     dev: true
 
   /clean-regexp@1.0.0:
