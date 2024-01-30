@@ -20,43 +20,55 @@
 	"files": [
 		"dist"
 	],
-	"main": "dist/index.js",
-	"module": "dist/index.mjs",
-	"scripts": {
-		"lint": "eslint .",
-		"build": "rollup -c",
-		"typecheck": "tsc --noEmit",
-		"test": "jest"
-	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "lint-staged"
+	"main": "./dist/index.cjs",
+	"module": "./dist/index.mjs",
+	"types": "./dist/index.d.cts",
+	"exports": {
+		"require": {
+			"types": "./dist/index.d.cts",
+			"default": "./dist/index.cjs"
+		},
+		"import": {
+			"types": "./dist/index.d.mts",
+			"default": "./dist/index.mjs"
 		}
 	},
-	"lint-staged": {
-		"*.[tj]s": "eslint"
+	"imports": {
+		"#rollup-plugin-htmlvue": {
+			"types": "./src/index.ts",
+			"development": "./src/index.ts",
+			"default": "./dist/index.mjs"
+		}
+	},
+	"scripts": {
+		"lint": "eslint .",
+		"build": "pkgroll",
+		"typecheck": "tsc",
+		"test": "tsx tests",
+		"dev": "tsx watch --conditions=development tests"
+	},
+	"peerDependencies": {
+		"rollup": "^2.0.0"
 	},
 	"dependencies": {
-		"@rollup/pluginutils": "^3.1.0",
-		"cheerio": "^1.0.0-rc.3"
+		"@rollup/pluginutils": "^5.1.0",
+		"cheerio": "1.0.0-rc.12"
 	},
 	"devDependencies": {
-		"@pvtnbr/eslint-config": "^0.7.0",
-		"@types/cheerio": "^0.22.21",
-		"@types/jest": "^27.0.1",
-		"builtin-modules": "^3.1.0",
-		"es-jest": "^1.3.0",
-		"eslint": "^7.32.0",
-		"husky": "^4.2.5",
-		"jest": "^26.2.2",
-		"lint-staged": "^10.2.11",
-		"rollup": "^2.23.1",
-		"rollup-plugin-typescript2": "^0.27.2",
-		"rollup-plugin-vue": "^5.1.9",
-		"semantic-release": "^17.1.1",
-		"typescript": "^4.4.2",
-		"vue": "^2.6.11",
-		"vue-template-compiler": "^2.6.11"
+		"@happy-dom/global-registrator": "^13.3.5",
+		"@pvtnbr/eslint-config": "^0.38.0",
+		"@types/cheerio": "^0.22.35",
+		"@types/node": "^20.11.10",
+		"@vitejs/plugin-vue": "^5.0.3",
+		"@vue/test-utils": "^2.4.3",
+		"eslint": "^8.56.0",
+		"fs-fixture": "^1.2.0",
+		"manten": "^1.2.0",
+		"pkgroll": "^2.0.1",
+		"rollup": "^2.79.1",
+		"tsx": "^4.7.0",
+		"typescript": "^5.3.3",
+		"vue": "^3.4.15"
 	},
 	"eslintConfig": {
 		"extends": "@pvtnbr"

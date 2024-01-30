@@ -1,24 +1,23 @@
-import { readFile } from 'fs';
-import { promisify } from 'util';
+import fs from 'fs/promises';
 import path from 'path';
-import { createFilter } from '@rollup/pluginutils';
+import { createFilter, type FilterPattern } from '@rollup/pluginutils';
 import { Plugin } from 'rollup';
 import { load } from 'cheerio';
 
-const $readFile = promisify(readFile);
-
-interface Options {
-	include?: string;
-	exclude?: string;
+export type Options = {
+	include?: FilterPattern;
+	exclude?: FilterPattern;
 	vOnce?: boolean;
 	vPre?: boolean;
 	functional?: boolean;
 	inheritListeners?: boolean;
-}
+};
 
 const virtualExtension = '.htmlvue.vue';
 
-export default function HtmlVue(options: Options = {}): Plugin {
+export const htmlvue = (
+	options: Options = {},
+): Plugin => {
 	const filter = createFilter(
 		options.include ?? '**/*.html',
 		options.exclude,
@@ -28,7 +27,7 @@ export default function HtmlVue(options: Options = {}): Plugin {
 		name: 'htmlvue',
 
 		// If it matches a resource, rename it with the .vue extension
-		async resolveId(id: string, importer?: string) {
+		async resolveId(id, importer) {
 			if (!path.isAbsolute(id)) {
 				const resolved = await this.resolve(id, importer, { skipSelf: true });
 				if (resolved && !resolved.external) {
@@ -44,34 +43,33 @@ export default function HtmlVue(options: Options = {}): Plugin {
 		},
 
 		// Create SFC
-		load(id) {
+		async load(id) {
 			if (!id.endsWith(virtualExtension)) {
 				return null;
 			}
 
-			return $readFile(id.replace(virtualExtension, '')).then((html) => {
-				let $ = load(html, { xmlMode: true });
+			const html = await fs.readFile(id.replace(virtualExtension, ''));
+			let $ = load(html, { xmlMode: true });
 
-				if ($.root().children().length > 1) {
-					$ = load(`<div>${$.xml()}</div>`, { xmlMode: true });
-				}
+			if ($.root().children().length > 1) {
+				$ = load(`<div>${$.xml()}</div>`, { xmlMode: true });
+			}
 
-				const rootElement = $.root().children().first();
+			const rootElement = $.root().children().first();
 
-				if (options.vOnce) {
-					rootElement.attr('v-once', '');
-				}
+			if (options.vOnce) {
+				rootElement.attr('v-once', '');
+			}
 
-				if (options.vPre) {
-					rootElement.attr('v-pre', '');
-				}
+			if (options.vPre) {
+				rootElement.attr('v-pre', '');
+			}
 
-				if (options.inheritListeners) {
-					rootElement.attr('v-on', '$listeners');
-				}
+			if (options.inheritListeners) {
+				rootElement.attr('v-on', '$listeners');
+			}
 
-				return `<template${options.functional ? ' functional' : ''}>${$.xml(rootElement)}</template>`;
-			});
+			return `<template${options.functional ? ' functional' : ''}>${$.xml(rootElement)}</template>`;
 		},
 	};
-}
+};

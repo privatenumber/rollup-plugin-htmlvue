@@ -1,9 +1,0 @@
-{
-	"extends": "..",
-	"compilerOptions": {
-		"lib": ["DOM"]
-	},
-	"include": [
-		"."
-	],
-}
