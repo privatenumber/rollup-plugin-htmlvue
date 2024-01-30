@@ -2,7 +2,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import { createFilter, type FilterPattern } from '@rollup/pluginutils';
 import { Plugin } from 'rollup';
-import { load } from 'cheerio';
+import cheerio from 'cheerio';
 
 export type Options = {
 	include?: FilterPattern;
@@ -50,10 +50,10 @@ const htmlvue = (
 
 			const html = await fs.readFile(id.replace(virtualExtension, ''));
 
-			let $ = load(html, { xmlMode: true });
+			let $ = cheerio.load(html, { xmlMode: true });
 
 			if ($.root().children().length > 1) {
-				$ = load(`<div>${$.xml()}</div>`, { xmlMode: true });
+				$ = cheerio.load(`<div>${$.xml()}</div>`, { xmlMode: true });
 			}
 
 			const rootElement = $.root().children().first();
