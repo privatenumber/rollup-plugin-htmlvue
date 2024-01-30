@@ -36,7 +36,7 @@
 	"scripts": {
 		"lint": "eslint .",
 		"build": "pkgroll",
-		"typecheck": "tsc --noEmit",
+		"type-check": "tsc",
 		"test": "jest"
 	},
 	"peerDependencies": {
